@@ -1,9 +1,6 @@
 import automato
+import criarafd
 
-automato.autbase.alfabeto = input("Digite o alfabeto do automato")
-automato.autbase.conjuntoaceitacao = input("Digite o conjunto aceitacao do automato")
-automato.autbase.estados = input("Digite os estados do automato")
-automato.autbase.inicial = input("Digite o estado inicial do automato")
-automato.autbase.transicoes = input("Digite as transicoes do automato")
+afd = criarafd.cria_afd()
 
-print(automato.autbase.transicoes, automato.autbase.alfabeto, automato.autbase.conjuntoaceitacao, automato.autbase.estados, automato.autbase.inicial)
+print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
