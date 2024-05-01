@@ -1,22 +1,24 @@
 import automato
-import sequencias
 
 #funcao para criar afd 
 
 def cria_afd():
     
     print("--AFD--\n")
+    #-----variaveis locais-------
     estados = input("Digite os estados do AFD: ").split()
     alfabeto = input("\n Informe o alfabeto do AFD: ").split()
     estini = input("\n Informe o estado inicial do AFD: ")
     estfim = input("\n Informe o(s) estado(s) final(s) do AFD: ").split()
     transicoes = {}
+
+    #----definicao do delta do automato------
     print("\nDefina as transições do AFD (delta):\n")
 
-    for estado in estados:
+    for estado in estados: #para cada estado
         print(estado)
 
-    for simbolo in alfabeto:
+    for simbolo in alfabeto: #e cada simbolo do alfabeto, ex. q1---a>  e q1---b> caso o alfabeto seja a e b
         print(simbolo)
 
     for estado in estados:
@@ -30,11 +32,10 @@ def cria_afd():
             if est_prox == 0: #não há ligacao entre o estado e um proximo por aquele simbolo
                 transicoes[(estado, simbolo)] = None
             else:
-                 transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
+                transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
     
-    conjunto_aceito = []
-    conjunto_aceito = sequencias.gerar_sequencias(estini, "", transicoes, conjunto_aceito, estfim, alfabeto)
+    #gera o automato, colocando as variaveis locais na classe e salva em uma variavel local
+    AFD = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim)   
 
-    AFD = automato.autbase(estados, alfabeto, transicoes, estini, conjunto_aceito, estfim)   
-
+    #retorna a variavel local
     return(AFD)
