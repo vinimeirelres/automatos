@@ -22,9 +22,9 @@ def verifica_aceita(automato, palavra):
   for simbolo in palavra:
     verf = 0
     for estados in estado_atual:
-      proximo_estado_prov = delta.get((estados, simbolo))
+      proximo_estado_prov = []
+      proximo_estado_prov = delta[(estados, simbolo)].split()
 
-      print(estados)
       if estados in estados_finais:  # Verifica se é estado atual
         aceita = 1
         if i == j: #se estiver no ultimo simbolo e chegar em um estado final a palavra e aceita
@@ -36,9 +36,9 @@ def verifica_aceita(automato, palavra):
 
       if verf == 0:
         proximo_estado = []
-        proximo_estado.append(proximo_estado_prov)
+        proximo_estado.extend(proximo_estado_prov)
       else:
-        proximo_estado.append(proximo_estado_prov)
+        proximo_estado.extend(proximo_estado_prov)
 
       if verf == len(estado_atual)-1:
         estado_atual = proximo_estado
@@ -48,7 +48,6 @@ def verifica_aceita(automato, palavra):
     if para == 1:
       break
     j = j+1
-    print(aceita)
 
   if aceita == 1:
     automato.conjaceit.append(palavra)

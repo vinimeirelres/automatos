@@ -1,25 +1,25 @@
 import automato
 
-#funcao para criar afd 
+#funcao para criar afn 
 
-def cria_afd():
+def cria_afn():
     
-    print("--AFD--\n")
+    print("--AFN--\n")
     #-----variaveis locais-------
-    estados = input("Digite os estados do AFD: ").split()
-    alfabeto = input("\n Informe o alfabeto do AFD: ").split()
-    estini = input("\n Informe o estado inicial do AFD: ")
-    estfim = input("\n Informe o(s) estado(s) final(s) do AFD: ").split()
+    estados = input("Digite os estados do AFN: ").split()
+    alfabeto = input("\n Informe o alfabeto do AFN: ").split()
+    estini = input("\n Informe o estado inicial do AFN: ")
+    estfim = input("\n Informe o(s) estado(s) final(s) do AFN: ").split()
     transicoes = {}
 
     #----definicao do delta do automato------
-    print("\nDefina as transições do AFD (delta):\n")
+    print("\nDefina as transições do AFN (delta):\n")
 
     for estado in estados:
         for simbolo in alfabeto:
             print(f"\t{simbolo}")
             print(f"{estado}\t--------->\t", end="")
-            est_prox = input("\n Informe o proximo estado: ")
+            est_prox = input("\n Informe o proximo estado: ") #permite que haja mais de uma opcao possivel de caminho para o estado
 
             #falta if para tratar casos em que  deixar vazio
 
@@ -29,7 +29,7 @@ def cria_afd():
                 transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
     
     #gera o automato, colocando as variaveis locais na classe e salva em uma variavel local
-    AFD = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim)   
+    AFN = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim)   
 
     #retorna a variavel local
-    return(AFD)
+    return(AFN)
