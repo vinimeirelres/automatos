@@ -19,7 +19,7 @@ def cria_afn():
         for simbolo in alfabeto:
             print(f"\t{simbolo}")
             print(f"{estado}\t--------->\t", end="")
-            est_prox = input("\n Informe o proximo estado: ") #permite que haja mais de uma opcao possivel de caminho para o estado
+            est_prox = input("\n Informe o proximo estado: ").split() #permite que haja mais de uma opcao possivel de caminho para o estado
 
             #falta if para tratar casos em que  deixar vazio
 
