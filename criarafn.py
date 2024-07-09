@@ -21,7 +21,7 @@ def cria_afn():
             print(f"{estado}\t--------->\t", end="")
             est_prox = input("\n Informe o proximo estado: ").split() #permite que haja mais de uma opcao possivel de caminho para o estado
 
-            #falta if para tratar casos em que  deixar vazio
+            #if abaixo trata estados em que o estado nao tiver ligacao com outros por aquele simbolo, coloca-se '0'
 
             if est_prox == 0: #não há ligacao entre o estado e um proximo por aquele simbolo
                 transicoes[(estado, simbolo)] = None
