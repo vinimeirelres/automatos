@@ -30,4 +30,18 @@ def minimizacao(afd):
                     delta[(estado, simbolo)] = estadonovo
 
 
-    print(F"{estados}\n{delta}")
+#cria a tabela, marcando metade dela com'x'
+    tabelaminimizacao = {}
+
+    for coluna in estados:
+        for linha in estados:
+
+            if coluna == linha:
+                tabelaminimizacao[(coluna, linha)] = 'x'
+                continue
+
+            if tabelaminimizacao[(linha, coluna)] != 'x':
+                tabelaminimizacao[(coluna, linha)] = 'x'
+
+
+    print(F"{tabelaminimizacao}")
