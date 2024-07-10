@@ -1,33 +1,33 @@
 import automato
 
 def minimizacao(afd):
-    estados = automato.transicoes
-    delta = automato.estados
-    alfabeto = automato.alfabeto
+    estados = afd.estados
+    delta = afd.transicoes
+    alfabeto = afd.alfabeto
 
-    estadonovo = 'qn'
+    estadonovo = "qn"
 
     #verifica se o automato está fechado, se não estiver, cria um novo estado e aponta onde está nulo para este novo estado
+    i = 0
     for estado in estados:
-        i = 0
         for simbolo in alfabeto:
             transicao = delta[(estado, simbolo)]
 
             if i == 0:
-                if transicao != None:
+                if transicao is not None:
                     continue
-                    i = 1
                 else:
+                    estados.append(estadonovo)
                     for simbolo in alfabeto:
-                        transnovo = [estadonovo, simbolo]
-                        delta.extend = transnovo
-                    delta[estado, simbolo] = estadonovo
+                        delta[estadonovo, simbolo] = estadonovo
+                    delta[(estado, simbolo)] = estadonovo
+                    i = 1
             else:
-                if transicao != None:
+                if transicao is not None:
                     continue
                     
                 else:
-                    delta[estado, simbolo] = estadonovo
+                    delta[(estado, simbolo)] = estadonovo
 
 
-    print(f"\t{estados}\n{delta}\n")
+    print(F"{estados}\n{delta}")
