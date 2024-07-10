@@ -1,9 +1,10 @@
+import minimiza
 import criarafd
 import criarafn
 import verificar_validade
 import converte
 
-afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
+#afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
 
@@ -17,7 +18,7 @@ afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 
 #print(afn.conjaceit)
 
-#afd = criarafd.cria_afd()
+afd = criarafd.cria_afd()
 #palavra = input("Digite a palavra a ser verificada - AFD").split()
 
 #verpalavra = verificar_validade.verifica_aceita(afd, palavra)
@@ -27,7 +28,9 @@ afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 #    print(f"A palavra {palavra} nao e aceita pelo automato")
 
 print("\n")
-afd = converte.afn_to_afd(afn)
+#afd = converte.afn_to_afd(afn)
 
-print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
+minimiza(afd)
+
+#print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
 
