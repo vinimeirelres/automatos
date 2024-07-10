@@ -30,9 +30,14 @@ def minimizacao(afd):
                     delta[(estado, simbolo)] = estadonovo
 
 
-#cria a tabela, marcando metade dela com'x'
+#cria a tabela, com todos os espacos com '' por padrão
     tabelaminimizacao = {}
 
+    for coluna in estados:
+        for linha in estados:
+            tabelaminimizacao[(coluna, linha)] = ''
+
+#marca metade da tabela com 'x'
     for coluna in estados:
         for linha in estados:
 
@@ -45,3 +50,4 @@ def minimizacao(afd):
 
 
     print(F"{tabelaminimizacao}")
+
