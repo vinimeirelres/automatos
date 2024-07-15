@@ -4,6 +4,7 @@ def minimizacao(afd):
     estados = afd.estados
     delta = afd.transicoes
     alfabeto = afd.alfabeto
+    finais = afd.finais
 
     estadonovo = "qn"
 
@@ -37,7 +38,7 @@ def minimizacao(afd):
         for linha in estados:
             tabelaminimizacao[(coluna, linha)] = ''
 
-#marca metade da tabela com 'x'
+#marca metade da tabela com 'x' (um par de estados acontece só uma vez)
     for coluna in estados:
         for linha in estados:
 
@@ -48,6 +49,12 @@ def minimizacao(afd):
             if tabelaminimizacao[(linha, coluna)] != 'x':
                 tabelaminimizacao[(coluna, linha)] = 'x'
 
-
+#marca na tabela estados trivialmente não equivalentes (finais e não finais)
+    for coluna in estados:
+        for linha in estados:
+            if tabelaminimizacao[(coluna, linha)] != 'x':
+                if (coluna in finais) and (linha not in finais):
+                    tabelaminimizacao[(coluna, linha)] = 'x'
+    
     print(F"{tabelaminimizacao}")
 
