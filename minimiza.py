@@ -49,7 +49,7 @@ def minimizacao(afd):
             if tabelaminimizacao[(linha, coluna)] != '&':
                 tabelaminimizacao[(coluna, linha)] = '&'
 
-#marca na tabela estados trivialmente não equivalentes (finais e não finais)
+#marca na tabela estados trivialmente não equivalentes (finais e não finais) com 'x'
     for coluna in estados:
         for linha in estados:
             if tabelaminimizacao[(coluna, linha)] != 'x' and tabelaminimizacao[(coluna, linha)] != '&':
