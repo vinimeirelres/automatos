@@ -55,6 +55,9 @@ def minimizacao(afd):
             if tabelaminimizacao[(coluna, linha)] != 'x':
                 if (coluna in finais) and (linha not in finais):
                     tabelaminimizacao[(coluna, linha)] = 'x'
+                else:
+                    if (linha in finais) and (coluna not in finais):
+                        tabelaminimizacao[(coluna, linha)] = 'x'
     
     print(F"{tabelaminimizacao}")
 
