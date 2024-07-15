@@ -38,7 +38,7 @@ def minimizacao(afd):
         for linha in estados:
             tabelaminimizacao[(coluna, linha)] = ''
 
-#marca metade da tabela com 'x' (um par de estados acontece só uma vez)
+#marca metade da tabela com '&' (um par de estados acontece só uma vez)
     for coluna in estados:
         for linha in estados:
 
