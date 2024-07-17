@@ -100,7 +100,6 @@ def minimizacao(afd):
                             marcar_recursivamente(coluna, linha) #verifica recursivamente
                        else:
                             tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
-                            tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
     
     #SEGUNDA VERIFICAÇÃO, garante que o primeiro estado verficado seja marcado, caso tenha que ser
     for coluna in estados:
@@ -119,7 +118,18 @@ def minimizacao(afd):
                        else:
                             tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
                             tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
+
+    estados_minimizados = []
+
+    for coluna in estados:
+        for linha in estados:
+            if tabelaminimizacao[(coluna, linha)] == '':
+                comb = [linha, coluna]
+                junta = " ".join(comb)
+                estados_minimizados.append(junta)
     
+
+
     print(F"{tabelaminimizacao}")
 
 
