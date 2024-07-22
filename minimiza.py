@@ -120,17 +120,39 @@ def minimizacao(afd):
                             tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
 
     estados_minimizados = []
-
+    lista_de_minimizados = []
+    #funciona, mas falta o q0
     for coluna in estados:
         for linha in estados:
             if tabelaminimizacao[(coluna, linha)] == '':
                 comb = [linha, coluna]
                 junta = " ".join(comb)
                 estados_minimizados.append(junta)
+
+                if coluna not in lista_de_minimizados:
+                    lista_de_minimizados.append(coluna) #vê todos os estados linha e coluna que foram agrupados
+                if linha not in lista_de_minimizados:
+                    lista_de_minimizados.append(linha)
+
+    estados_minimizacao = [afd.inicial]
+
+    #tenta resolver o problema do estado inicial
+    for estado in estados_minimizacao:
+        for simbolo in alfabeto:
+            if delta[(estado, simbolo)] not in lista_de_minimizados:
+                estados_minimizacao.append(delta[(estado,simbolo)]) #faz a ponte entre o estado inicial e os estados que foram minimizados, permitindo que seja possivel chegar nele
+    
+    #adiciona os estados que foram minimizados na lista de estados minimização
+    for estado in estados_minimizados:
+        estados_minimizacao.append(estado)
+
+    #falta criar o delta, definir finais, (o inicial é o mesmo), 
+    #criar o afd minimizado e retornar
+    
     
 
 
-    print(F"{tabelaminimizacao}")
+    print(F"{tabelaminimizacao}\n{estados_minimizacao}")
 
 
 
