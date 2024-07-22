@@ -139,7 +139,7 @@ def minimizacao(afd):
     #tenta resolver o problema do estado inicial
     for estado in estados_minimizacao:
         for simbolo in alfabeto:
-            if delta[(estado, simbolo)] not in lista_de_minimizados:
+            if delta[(estado, simbolo)] not in lista_de_minimizados and delta[(estado, simbolo)] not in estados_minimizacao:
                 estados_minimizacao.append(delta[(estado,simbolo)]) #faz a ponte entre o estado inicial e os estados que foram minimizados, permitindo que seja possivel chegar nele
     
     #adiciona os estados que foram minimizados na lista de estados minimização
@@ -153,6 +153,5 @@ def minimizacao(afd):
 
 
     print(F"{tabelaminimizacao}\n{estados_minimizacao}")
-
 
 
