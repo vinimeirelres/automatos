@@ -127,15 +127,38 @@ def minimizacao(afd):
     for estado in estados:
         mapa_minimizados[(estado)] = []
 
+    lista_min_finais = []
+    lista_min_nfinais = []
 
     #funciona, mas falta o q0
     for coluna in estados:
         for linha in estados:
+            aux = 0
             if tabelaminimizacao[(coluna, linha)] == '':
+                if linha in finais:
+                    if linha not in lista_min_finais:
+                        lista_min_finais.append(linha)
+                        aux = 1
+                
+                if coluna in finais: #agrupa os estados minimizados finais
+                    if coluna not in lista_min_finais:
+                        lista_min_finais.append(finais)
+                        aux = 1
+
+                if aux == 0: #agrupa os estados minimizados não finais
+                    if linha not in lista_min_nfinais:
+                        lista_min_nfinais.append(linha)
+                    if coluna not in lista_min_nfinais:
+                        lista_min_nfinais.append(coluna)
+
+
                 comb = [coluna, linha]
                 junta = " ".join(comb)
                 estados_minimizados.append(junta)
                 
+
+                print(f"{lista_min_finais}\n{lista_min_nfinais}")
+
                 #faz o mapeamento de alternativas para os estados que foram agrupados
                 if junta not in mapa_minimizados[(coluna)]: 
                     mapa_minimizados[(coluna)].append(junta)
@@ -217,6 +240,6 @@ def minimizacao(afd):
 
  
 
-    print(F"{estados_minimizados}\n{delta_minimizado}")
+    #print(F"{estados_minimizados}\n{delta_minimizado}")
 
 
