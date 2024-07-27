@@ -23,7 +23,7 @@ def cria_afn():
 
             #if abaixo trata estados em que o estado nao tiver ligacao com outros por aquele simbolo, coloca-se '0'
 
-            if est_prox == 0: #não há ligacao entre o estado e um proximo por aquele simbolo
+            if not est_prox: #não há ligacao entre o estado e um proximo por aquele simbolo
                 transicoes[(estado, simbolo)] = None
             else:
                 transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
