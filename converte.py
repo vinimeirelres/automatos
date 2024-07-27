@@ -13,16 +13,18 @@ def afn_to_afd(afn):
     finais = afn.finais
     tabelatransicaoafd = {}
     deltaelemento = []
-    deltacombinacao = []
  
     for combinacao in listadecombinacoes: #faz a tabela de transicao, fazendo a lista de todas as trsnsições de uma combinacao, para todas as combinacoes
+        deltacombinacao = []
         for simbolo in alfabeto:#cada combinacao terá o seu delta atrelado com cada um dos simbolos do alfabeto
             i = 0
             for elemento in combinacao:#itera dentro de cada elemento da combinacao para criar o delta da combinacao
                 deltaelemento = []
                 deltaelemento = delta[(elemento, simbolo)]
 
-                if i == 0:
+                if deltaelemento is None:
+                    continue
+                elif i == 0:
                     deltacombinacao = deltaelemento[:]#comeca a criar o delta em caso de +1 elememnto, ou define o delta da combinacaoo em caso de 1 elemento
                 else:
                     for elemento in deltaelemento:
