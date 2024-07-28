@@ -1,7 +1,7 @@
 from graphviz import Digraph
 import random
 import os
-
+#MUDAR
 def desenha_automato(aut):
    
     desenho = Digraph() #Definindo que a var desenho é do tipo Digraph()
@@ -17,8 +17,15 @@ def desenha_automato(aut):
     
     for estado in aut.estados:
         for simbolo in aut.alfabeto:
-            desenho.edge(estado, aut.transicoes[(estado, simbolo)], label=simbolo)
-     #edge insere as setas de acordo com o delta, label = simbolo siginica que em cima da seta estará o simbolo.
+            destinos = aut.transicoes[(estado, simbolo)]
+            if destinos: #trata transições vazias (None)
+                if isinstance(destinos, list): #se a transição for uma lista, itera sobre a lista e faz várias arestas
+                    for destino in destinos:
+                        desenho.edge(estado, destino, label=simbolo)
+                else:
+                    desenho.edge(estado, destinos, label=simbolo)
+     #edge insere as setas de acordo com o delta (destinos), label = simbolo siginica que em cima da seta estará o simbolo.
+    
     aleatorio = round((random.random())*10,2) #define um numero aleatorio para nome da imagem gerada (cada imagem tera um nome diferente 'aut+numrandom')
     aleatorio = str(aleatorio).replace(".", "")  # converte para string e remove pontos
     
