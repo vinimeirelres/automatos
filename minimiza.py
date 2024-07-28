@@ -9,27 +9,18 @@ def minimizacao(afd):
     estadonovo = "qn"
 
     #verifica se o automato está fechado, se não estiver, cria um novo estado e aponta onde está nulo para este novo estado
-    i = 0
     for estado in estados:
         for simbolo in alfabeto:
             transicao = delta[(estado, simbolo)]
 
-            if i == 0:
-                if transicao is not None:
-                    continue
-                else:
+
+            if not transicao:
+                delta[(estado, simbolo)] = estadonovo
+
+                if estadonovo not in estados:
                     estados.append(estadonovo)
                     for simbolo in alfabeto:
                         delta[estadonovo, simbolo] = estadonovo
-                    delta[(estado, simbolo)] = estadonovo
-                    i = 1
-            else:
-                if transicao is not None:
-                    continue
-                    
-                else:
-                    delta[(estado, simbolo)] = estadonovo
-
 
     #cria a tabela, com todos os espacos com '' por padrão
     tabelaminimizacao = {}
@@ -119,127 +110,128 @@ def minimizacao(afd):
                             tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
                             tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
 
+    #INICIO DA JUNÇÃO E MAPEAMENTO DOS ESTADOS EQUIVALENTES E CONSTRUÇÃO DO DELTA
+
     estados_minimizados = []
-    lista_de_minimizados = []
     mapa_minimizados = {} #cria um mapa de minimizados para conseguir identificar para quais estados apontar no delta
     
-    #inicializa o dicionario
+    #inicializa o dicionario do mapa de estados minimizados
     for estado in estados:
         mapa_minimizados[(estado)] = []
 
     lista_min_finais = []
     lista_min_nfinais = []
 
-    #funciona, mas falta o q0
+    #fagrupa os estados minimizados finais e não finais nas suas respectovas listas
     for coluna in estados:
         for linha in estados:
-            aux = 0
             if tabelaminimizacao[(coluna, linha)] == '':
-                if linha in finais:
+
+                if linha in finais: #agrupa os estados minimizados finais
                     if linha not in lista_min_finais:
                         lista_min_finais.append(linha)
-                        aux = 1
                 
                 if coluna in finais: #agrupa os estados minimizados finais
                     if coluna not in lista_min_finais:
-                        lista_min_finais.append(finais)
-                        aux = 1
+                        lista_min_finais.append(coluna)
 
-                if aux == 0: #agrupa os estados minimizados não finais
+                if linha not in lista_min_finais: #agrupa os estados minimizados não finais
                     if linha not in lista_min_nfinais:
                         lista_min_nfinais.append(linha)
+                
+                if coluna not in lista_min_finais: #agrupa os estados minimizados não finais
                     if coluna not in lista_min_nfinais:
                         lista_min_nfinais.append(coluna)
-
-
-                comb = [coluna, linha]
-                junta = " ".join(comb)
-                estados_minimizados.append(junta)
                 
+    #cria os estados agrupados e cria o mapa de estados minimizados, que mapeia o estado original para um estado agrupado equivalente
+    if lista_min_finais:
+        finalagrupado = " ".join(lista_min_finais)
+        for estado in lista_min_finais: 
+            mapa_minimizados[estado].append(finalagrupado)
+    else:
+        finalagrupado = None
+    if lista_min_nfinais:
+        nfinalagrupado = " ".join(lista_min_nfinais)
+        for estado in lista_min_nfinais: 
+            mapa_minimizados[estado].append(nfinalagrupado)
+    else:
+        nfinalagrupado = None
 
-                print(f"{lista_min_finais}\n{lista_min_nfinais}")
-
-                #faz o mapeamento de alternativas para os estados que foram agrupados
-                if junta not in mapa_minimizados[(coluna)]: 
-                    mapa_minimizados[(coluna)].append(junta)
-                if junta not in mapa_minimizados[(linha)]:
-                    mapa_minimizados[(linha)].append(junta)
-
-
-                if coluna not in lista_de_minimizados:
-                    lista_de_minimizados.append(coluna) #vê todos os estados linha e coluna que foram agrupados
-                if linha not in lista_de_minimizados:
-                    lista_de_minimizados.append(linha)
-
-    estados_minimizacao = [afd.inicial]
-
-    #tenta resolver o problema do estado inicial
-    for estado in estados_minimizacao:
-        for simbolo in alfabeto:
-            if delta[(estado, simbolo)] not in lista_de_minimizados and delta[(estado, simbolo)] not in estados_minimizacao:
-                estados_minimizacao.append(delta[(estado,simbolo)]) #faz a ponte entre o estado inicial e os estados que foram minimizados, permitindo que seja possivel chegar nele
     
-    #adiciona os estados que foram minimizados na lista de estados minimização
-    for estado in estados_minimizados:
-        estados_minimizacao.append(estado)
+    
+    
+    #definição do estado
+    if afd.inicial in lista_min_nfinais:
+        inicial = nfinalagrupado
+    else:
+        inicial = afd.inicial
+
+
+    estados_minimizados = [inicial]
 
     delta_minimizado = {}
 
-    problemas = {}
-
-     #cria o delta do minimizado para os estados que não foram agrupados, coloca a junção em problemas
-    for estado in estados_minimizacao:
+    #cria o delta do minimizado para os estados que não foram agrupados
+    for estado in estados_minimizados:
         for simbolo in alfabeto:
-            if estado not in estados_minimizados:
+            if estado is not finalagrupado and estado is not nfinalagrupado:
                 delta_minimizado[(estado, simbolo)] = delta[(estado,simbolo)]
 
-                if delta[(estado, simbolo)] not in estados_minimizacao:
-                    lista_desejada = mapa_minimizados.get((delta[(estado, simbolo)]), [])
-                    val = lista_desejada[0]
-                    delta_minimizado[(estado, simbolo)] = val
-
-    #adiciona o delta dos estados agrupados, mas sem junção        
-    for coluna in estados:
-        for linha in estados:
-            for simbolo in alfabeto:
-                if tabelaminimizacao[(coluna, linha)] == '':
-                    p1 = delta[(coluna, simbolo)]
-                    p2 = delta[(linha, simbolo)]
-#tabulate
-                    if p1 == p2:
-                        if p1 == linha or p1 == coluna or p2 == linha or p2 == coluna:
-                           comb = [coluna, linha]
-                           junta = " ".join(comb) #se os dois apontam para um mesmo estado minimizado, ele aponta para ele mesmo
-
-                           combt = [coluna,linha]
-                           juntat = " ".join(combt)
-
-                           delta_minimizado[(juntat, simbolo)] = junta
-                        else:
-                            lista_desejada = mapa_minimizados.get(p1)
-                            val = lista_desejada[0]
-                            delta_minimizado[(juntat, simbolo)] = val
-
-                    elif tabelaminimizacao[(p1, p2)] == '&':
-                        comb = [p2, p1]
-                        junta = " ".join(comb)
-
-                        combt = [coluna,linha]
-                        juntat = " ".join(combt)
-
-                        delta_minimizado[(juntat, simbolo)] = junta
-
+                if delta[(estado, simbolo)] not in estados_minimizados:
+                    if delta[(estado, simbolo)] in lista_min_finais or delta[(estado, simbolo)] in lista_min_nfinais:
+                        lista_desejada = mapa_minimizados.get((delta[(estado, simbolo)]), [])
+                        val = lista_desejada[0]
+                        delta_minimizado[(estado, simbolo)] = val
                     else:
-                        comb = [p1, p2]
-                        junta = " ".join(comb)
+                        estados_minimizados.append(delta[(estado,simbolo)])
 
-                        combt = [coluna,linha]
-                        juntat = " ".join(combt)
+    #adiciona os estados que foram minimizados na lista de estados minimizados
+    if inicial is not afd.inicial:
+        estados_minimizados.append(finalagrupado)
+    else:
+        if nfinalagrupado:
+            estados_minimizados.append(nfinalagrupado)
+        if finalagrupado:
+            estados_minimizados.append(finalagrupado)
 
-                        delta_minimizado[(juntat, simbolo)] = junta
 
- 
+    if nfinalagrupado:  
+        for estado in lista_min_nfinais:         
+            for simbolo in alfabeto:
+                delta_minimizado[(nfinalagrupado, simbolo)] = None
 
-    #print(F"{estados_minimizados}\n{delta_minimizado}")
+                p1 = delta[(estado, simbolo)]
 
+                if p1 in lista_min_finais:
+                    if finalagrupado is not delta_minimizado[(nfinalagrupado, simbolo)]:
+                        delta_minimizado[(nfinalagrupado, simbolo)] = finalagrupado
+                elif p1 in lista_min_nfinais:
+                    if nfinalagrupado is not delta_minimizado[(nfinalagrupado, simbolo)]:
+                        delta_minimizado[(nfinalagrupado, simbolo)] = nfinalagrupado
+                elif p1 in estados_minimizados:
+                    delta_minimizado[(nfinalagrupado, simbolo)] = p1
 
+    #adiciona o delta dos estados agrupados  
+    if finalagrupado:  
+        for estado in lista_min_finais:         
+            for simbolo in alfabeto:
+                delta_minimizado[(finalagrupado, simbolo)] = None
+                p1 = delta[(estado, simbolo)]
+
+                if p1 in lista_min_finais:
+                    if finalagrupado is not delta_minimizado[(finalagrupado, simbolo)]:
+                        delta_minimizado[(finalagrupado, simbolo)] = finalagrupado
+                elif p1 in lista_min_nfinais:
+                    if nfinalagrupado is not delta_minimizado[(finalagrupado, simbolo)]:
+                        delta_minimizado[(finalagrupado, simbolo)] = nfinalagrupado
+                elif p1 in estados_minimizados:
+                    delta_minimizado[(finalagrupado, simbolo)] = p1
+    
+    
+    listafinais= [finalagrupado]
+#tabulate
+    #cria o automato minimizado
+    AFDMin = automato.autbase(estados_minimizados, alfabeto, delta_minimizado, inicial, [], listafinais)
+
+    #retorna o automato
+    return (AFDMin)
