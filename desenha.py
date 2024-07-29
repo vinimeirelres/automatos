@@ -1,7 +1,6 @@
 from graphviz import Digraph
 import random
 import os
-
 def desenha_automato(aut):
    
     desenho = Digraph() #Definindo que a var desenho é do tipo Digraph()
