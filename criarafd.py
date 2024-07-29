@@ -21,7 +21,6 @@ def cria_afd():
             print(f"{estado}\t--------->\t", end="")
             est_prox = input("\n Informe o proximo estado: ")
 
-            #falta if para tratar casos em que  deixar vazio
 
             if not est_prox: #não há ligacao entre o estado e um proximo por aquele simbolo
                 transicoes[(estado, simbolo)] = None
