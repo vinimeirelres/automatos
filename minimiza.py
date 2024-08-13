@@ -112,6 +112,7 @@ def minimizacao(afd):
 
     #INICIO DA JUNÇÃO E MAPEAMENTO DOS ESTADOS EQUIVALENTES E CONSTRUÇÃO DO DELTA
 
+    
     estados_minimizados = []
     mapa_minimizados = {} #cria um mapa de minimizados para conseguir identificar para quais estados apontar no delta
     
@@ -227,6 +228,14 @@ def minimizacao(afd):
                 elif p1 in estados_minimizados:
                     delta_minimizado[(finalagrupado, simbolo)] = p1
     
+    if estadonovo in estados_minimizados:
+        estados_minimizados.remove(estadonovo)
+
+        for estado in estados_minimizados:
+            for simbolo in alfabeto:
+                if delta_minimizado[(estado, simbolo)] == estadonovo:
+                    delta_minimizado[(estado, simbolo)] = None
+
     
     listafinais= [finalagrupado]
 #tabulate
