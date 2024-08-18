@@ -5,6 +5,8 @@ import verificar_validade
 import converte
 import desenha
 
+#equivalência, expressão regular, front, máquina de turing, relatório
+
 #afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
