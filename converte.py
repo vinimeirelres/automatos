@@ -104,6 +104,6 @@ def afn_to_afd(afn):
 
     #Contrucao do AFD
 
-    AFD = automato.autbase(estados_reduzida, alfabeto, tabelareduzidaafd, afn.inicial, [], finais_reduzida)
+    AFD = automato.autbase(estados_reduzida, alfabeto, tabelareduzidaafd, afn.inicial, [], finais_reduzida, 'afd')
 
     return(AFD)

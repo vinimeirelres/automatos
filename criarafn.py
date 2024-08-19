@@ -29,7 +29,7 @@ def cria_afn():
                 transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
     
     #gera o automato, colocando as variaveis locais na classe e salva em uma variavel local
-    AFN = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim)   
+    AFN = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim, 'afn')   
 
     #retorna a variavel local
     return(AFN)

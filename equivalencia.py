@@ -1,4 +1,9 @@
 def equivalencia(afr, afnd):
+    
+    
+    
+    
+    
     """
     Função que verifica se dois autômatos são equivalentes.
     """

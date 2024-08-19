@@ -28,7 +28,7 @@ def cria_afd():
                 transicoes[(estado, simbolo)] = est_prox  #armazenando o automato
     
     #gera o automato, colocando as variaveis locais na classe e salva em uma variavel local
-    AFD = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim)   
+    AFD = automato.autbase(estados, alfabeto, transicoes, estini, [], estfim, 'afd')   
 
     #retorna a variavel local
     return(AFD)

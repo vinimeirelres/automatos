@@ -231,7 +231,7 @@ def minimizacao(afd):
         listafinais = finais
 #tabulate
     #cria o automato minimizado
-    AFDMin = automato.autbase(estados_minimizados, alfabeto, delta_minimizado, inicial, [], listafinais)
+    AFDMin = automato.autbase(estados_minimizados, alfabeto, delta_minimizado, inicial, [], listafinais, 'afd')
 
     #retorna o automato
     return (AFDMin)
