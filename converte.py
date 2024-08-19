@@ -82,7 +82,7 @@ def afn_to_afd(afn):
     acessiveistc = remove_naoacesssiveis(acessiveisdc, afn.inicial, alfabeto, tabelatransicaoafd)
     
     estados_reduzida = acessiveistc
-
+    
     finais_reduzida = []
     for estados in estados_reduzida: #definindo os estados finais da tabela reduzida
         if estados in estados_finais:
