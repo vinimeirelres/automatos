@@ -20,14 +20,17 @@ import desenha
 #    print(f"A palavra {palavra} nao e aceita pelo automato")
 
 #print(afn.conjaceit)
-afn = criarafn.cria_afn()
-desenha.desenha_automato(afn)
+#afn = criarafn.cria_afn()
+#desenha.desenha_automato(afn)
 
 
-print("\n----CONVERSÃO----\n")
-afd = converte.afn_to_afd(afn)
-desenha.desenha_automato(afd)
+#print("\n----CONVERSÃO----\n")
+#afd = converte.afn_to_afd(afn)
+#desenha.desenha_automato(afd)
 #palavra = input("Digite a palavra a ser verificada - AFD").split()
+
+afd = criarafd.cria_afd()
+desenha.desenha_automato(afd)
 
 #verpalavra = verificar_validade.verifica_aceita(afd, palavra)
 #if verpalavra == 1:

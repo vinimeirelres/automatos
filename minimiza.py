@@ -76,39 +76,28 @@ def minimizacao(afd):
                     tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
         
     #marca na tabela estados não equivalentes
-    for coluna in estados:
-        for linha in estados: #vê cada registro da tabela
-            if tabelaminimizacao[(coluna, linha)] == '':
-                for simbolo in alfabeto: #cada simbolo do alfabeto
-                    #pega o caminho para onde vai coluna e linha (ex. (q0, q1)-a> (q0, q3), pega (q0, q3))
-                    p1 = delta[(coluna, simbolo)]
-                    p2 = delta[(linha, simbolo)]
+    def marca_nao_equivalentes():
+        for coluna in estados:
+            for linha in estados: #vê cada registro da tabela
+                if tabelaminimizacao[(coluna, linha)] == '':
+                    for simbolo in alfabeto: #cada simbolo do alfabeto
+                        #pega o caminho para onde vai coluna e linha (ex. (q0, q1)-a> (q0, q3), pega (q0, q3))
+                        p1 = delta[(coluna, simbolo)]
+                        p2 = delta[(linha, simbolo)]
 
-                    if p1 != p2: #verifica se os dois são não são iguais
-                       #verifica o caminho na tabela, incluindo espeho
-                       if tabelaminimizacao[(p1, p2)] == 'x' or tabelaminimizacao[(p2,p1)] == 'x':
-                            #se tiver um 'x' no caminiho, vai para a verificação recursiva
-                            marcar_recursivamente(coluna, linha) #verifica recursivamente
-                       else:
-                            tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
+                        if p1 != p2: #verifica se os dois são não são iguais
+                        #verifica o caminho na tabela, incluindo espeho
+                            if tabelaminimizacao[(p1, p2)] == 'x' or tabelaminimizacao[(p2,p1)] == 'x':
+                                #se tiver um 'x' no caminiho, vai para a verificação recursiva
+                                marcar_recursivamente(coluna, linha) #verifica recursivamente
+                            else:
+                                    tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
     
-    #SEGUNDA VERIFICAÇÃO, garante que o primeiro estado verficado seja marcado, caso tenha que ser
-    for coluna in estados:
-        for linha in estados: #vê cada registro da tabela
-            if tabelaminimizacao[(coluna, linha)] == '':
-                for simbolo in alfabeto: #cada simbolo do alfabeto
-                    #pega o caminho para onde vai coluna e linha (ex. (q0, q1)-a> (q0, q3), pega (q0, q3))
-                    p1 = delta[(coluna, simbolo)]
-                    p2 = delta[(linha, simbolo)]
-
-                    if p1 != p2: #verifica se os dois são não são iguais
-                       #verifica o caminho na tabela, incluindo espeho
-                       if tabelaminimizacao[(p1, p2)] == 'x' or tabelaminimizacao[(p2,p1)] == 'x':
-                            #se tiver um 'x' no caminiho, vai para a verificação recursiva
-                            marcar_recursivamente(coluna, linha) #verifica recursivamente
-                       else:
-                            tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
-                            tabelaminimizacao[(p2, p1)] = tabelaminimizacao.get((p2, p1), '')
+    #dupla verificação para garantir que todos os estados não equivalentes sejam marcados
+    marca_nao_equivalentes()
+    marca_nao_equivalentes()
+    marca_nao_equivalentes()
+    
 
     #INICIO DA JUNÇÃO E MAPEAMENTO DOS ESTADOS EQUIVALENTES E CONSTRUÇÃO DO DELTA
 
