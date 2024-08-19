@@ -4,8 +4,9 @@ import criarafn
 import verificar_validade
 import converte
 import desenha
+import equivalencia
 
-#equivalência, expressão regular, front, máquina de turing, relatório
+#expressão regular, front, máquina de turing, relatório
 
 #afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 
@@ -20,31 +21,37 @@ import desenha
 #    print(f"A palavra {palavra} nao e aceita pelo automato")
 
 #print(afn.conjaceit)
-#afn = criarafn.cria_afn()
-#desenha.desenha_automato(afn)
+afn = criarafn.cria_afn()
+desenha.desenha_automato(afn)
 
 
 print("\n----CONVERSÃO----\n")
-#afd = converte.afn_to_afd(afn)
-#desenha.desenha_automato(afd)
+afd = converte.afn_to_afd(afn)
+desenha.desenha_automato(afd)
 #palavra = input("Digite a palavra a ser verificada - AFD").split()
 
-afd = criarafd.cria_afd()
-desenha.desenha_automato(afd)
+#afd = criarafd.cria_afd()
+#desenha.desenha_automato(afd)
 #verpalavra = verificar_validade.verifica_aceita(afd, palavra)
 #if verpalavra == 1:
 #    print(f"A palavra {palavra} e aceita pelo automato")
 #else:
 #    print(f"A palavra {palavra} nao e aceita pelo automato")
 
-print("\n")
+#print("\n")
 #afd = converte.afn_to_afd(afn)
-print("\n----MINIMIZAÇÃO----\n")
-minimizado = minimiza.minimizacao(afd)
+#print("\n----MINIMIZAÇÃO----\n")
+#minimizado = minimiza.minimizacao(afd)
 
 
-desenha.desenha_automato(minimizado)
-print(minimizado.tipo_aut)
+#desenha.desenha_automato(minimizado)
+#print(minimizado.tipo_aut)
+
+equivalencia = equivalencia.equivalencia(afn, afd)
+if(equivalencia):
+    print("Os automatos sao equivalentes")
+else:
+    print("Os automatos nao sao equivalentes")
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
 
