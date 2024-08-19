@@ -236,8 +236,10 @@ def minimizacao(afd):
                 if delta_minimizado[(estado, simbolo)] == estadonovo:
                     delta_minimizado[(estado, simbolo)] = None
 
-    
-    listafinais= [finalagrupado]
+    if finalagrupado:
+        listafinais= [finalagrupado]
+    else:
+        listafinais = finais
 #tabulate
     #cria o automato minimizado
     AFDMin = automato.autbase(estados_minimizados, alfabeto, delta_minimizado, inicial, [], listafinais)

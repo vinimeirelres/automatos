@@ -7,7 +7,7 @@ def afn_to_afd(afn):
     for i in range(1, len(afn.estados)+1): #cria todas as combinacoes possiveis entre os estados, para criacao da tabela de transicao
         listadecombinacoes_aux = list(combinations(afn.estados, i)) #cria todas as combinacoes com 1,2, 3... elementos
         listadecombinacoes.extend(listadecombinacoes_aux)#depois vai concatenando os elementos numa lista de combinacoes completa
-
+    
     delta = afn.transicoes
     alfabeto = afn.alfabeto
     finais = afn.finais
@@ -38,7 +38,6 @@ def afn_to_afd(afn):
 
 
 
-
     #------estados finais-------
     estados_finais = []
     for combinacao in listadecombinacoes: #verifica cada uma das combinacoes
@@ -47,7 +46,6 @@ def afn_to_afd(afn):
                 if combinacao not in estados_finais: #se ele encontrar e a combinacao nao estiver na lista de estados finais
                     estadofinal = " ".join(combinacao) #junta os elementos da combinacao (ver exemplo um pouco abaixo)
                     estados_finais.append(estadofinal) #e junta cada nova string como um elemento da lista de estados finais
-             
 
     #-----tabela de transicoes reduzida-------
     auxcomb = []
@@ -60,30 +58,35 @@ def afn_to_afd(afn):
         if estados in tabelatransicaoafd.values():
             if estados not in estados_reduzida:
                 estados_reduzida.append(estados)
+
+
+    def remove_naoacesssiveis(lista_de_estados, inicial, alfabeto, tabelatransicoes): #funcao para remover estados inacessiveis
+        acessiveis = []
+        for estados in lista_de_estados:  #retira estados inacessiveis que nao foram retirados previamente
+            if estados == inicial:
+                acessiveis.append(estados)
+                continue
+            else:
+                for estado in lista_de_estados:
+                    if estado != estados:
+                        for simbolo in alfabeto:
+                            if estados == tabelatransicoes[(estado, simbolo)]:
+                                if(estados) not in acessiveis:
+                                    acessiveis.append(estados)
+                                    break
+        return acessiveis
     
-
-    acessiveis = []
-    for estados in estados_reduzida:  #retira estados inacessiveis que nao foram retirados previamente
-        if estados == afn.inicial:
-            acessiveis.append(estados)
-            continue
-        else:
-            for estado in estados_reduzida:
-                if estado != estados:
-                    for simbolo in alfabeto:
-                        if estados == tabelatransicaoafd[(estado, simbolo)]:
-                            if(estados) not in acessiveis:
-                                acessiveis.append(estados)
-                                break
-
-    estados_reduzida = acessiveis
-
+    #tripla checagem de estados acessiveis
+    acessiveisfc = remove_naoacesssiveis(estados_reduzida, afn.inicial, alfabeto, tabelatransicaoafd)
+    acessiveisdc = remove_naoacesssiveis(acessiveisfc, afn.inicial, alfabeto, tabelatransicaoafd)
+    acessiveistc = remove_naoacesssiveis(acessiveisdc, afn.inicial, alfabeto, tabelatransicaoafd)
+    
+    estados_reduzida = acessiveistc
 
     finais_reduzida = []
     for estados in estados_reduzida: #definindo os estados finais da tabela reduzida
         if estados in estados_finais:
             finais_reduzida.append(estados)
-
 
     #se quiser fazer o indice ser s(i), fazer aqui
     #comparar os estados reduzidos e encontra-los na tabela de transicao
@@ -98,7 +101,6 @@ def afn_to_afd(afn):
             delt = tabelatransicaoafd[(estado, simbolo)]
             delt = "".join(delt)
             tabelareduzidaafd[(estado, simbolo)] = delt #elemento que sera indice vai ter uma so string
-
 
     #Contrucao do AFD
 
