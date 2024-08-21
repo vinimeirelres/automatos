@@ -40,18 +40,16 @@ desenha.desenha_automato(afd)
 
 #print("\n")
 #afd = converte.afn_to_afd(afn)
-#print("\n----MINIMIZAÇÃO----\n")
-#minimizado = minimiza.minimizacao(afd)
-
-
-#desenha.desenha_automato(minimizado)
+print("\n----MINIMIZAÇÃO----\n")
+minimizado = minimiza.minimizacao(afd)
+desenha.desenha_automato(minimizado)
 #print(minimizado.tipo_aut)
 
-equivalencia = equivalencia.equivalencia(afn, afd)
-if(equivalencia):
-    print("Os automatos sao equivalentes")
-else:
-    print("Os automatos nao sao equivalentes")
+#equivalencia = equivalencia.equivalencia(afn, afd)
+#if(equivalencia):
+  #  print("Os automatos sao equivalentes")
+#else:
+   # print("Os automatos nao sao equivalentes")
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
 

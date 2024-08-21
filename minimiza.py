@@ -93,7 +93,7 @@ def minimizacao(afd):
                             else:
                                     tabelaminimizacao[(p1, p2)] = tabelaminimizacao.get((p1, p2), '') 
     
-    #dupla verificação para garantir que todos os estados não equivalentes sejam marcados
+    #tripla verificação para garantir que todos os estados não equivalentes sejam marcados
     marca_nao_equivalentes()
     marca_nao_equivalentes()
     marca_nao_equivalentes()
