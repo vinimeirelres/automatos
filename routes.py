@@ -35,7 +35,6 @@ def processar_afd():
     finais = request.form['finais'].split(',')
 
     afd = automato.autbase(estados, alfabeto, transicoes, inicial, [], finais, 'afd')
-    # Imprimindo os atributos do AFD
     print("Estados:", afd.estados)
     print("Alfabeto:", afd.alfabeto)
     print("Transições:", afd.transicoes)
@@ -44,7 +43,6 @@ def processar_afd():
     print("Tipo de Autômato:", afd.tipo_aut)
 
 
-    # Aqui você pode fazer o que quiser com o AFD, como salvar em um banco de dados ou processar
     desenha.desenha_automato(afd)
 
 @app.route('/processar_afn', methods=['POST'])
@@ -66,7 +64,6 @@ def processar_afn():
     finais = request.form['finais'].split(',')
 
     afn = automato.autbase(estados, alfabeto, transicoes, inicial, [], finais, 'afn')
-    # Imprimindo os atributos do AFD
     print("Estados:", afn.estados)
     print("Alfabeto:", afn.alfabeto)
     print("Transições:", afn.transicoes)
@@ -75,7 +72,6 @@ def processar_afn():
     print("Tipo de Autômato:", afn.tipo_aut)
 
 
-    # Aqui você pode fazer o que quiser com o AFD, como salvar em um banco de dados ou processar
     desenha.desenha_automato(afn)
 
 if __name__ == '__main__':
