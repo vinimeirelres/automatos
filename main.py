@@ -25,10 +25,17 @@ afn = criarafn.cria_afn()
 desenha.desenha_automato(afn)
 
 
-print("\n----CONVERSÃO----\n")
-afd = converte.afn_to_afd(afn)
-desenha.desenha_automato(afd)
+#print("\n----CONVERSÃO----\n")
+#afd = criarafd.cria_afd()
+#desenha.desenha_automato(afd)
 #palavra = input("Digite a palavra a ser verificada - AFD").split()
+
+print("Estados:", afn.estados)
+print("Alfabeto:", afn.alfabeto)
+print("Transições:", afn.transicoes)
+print("Estado Inicial:", afn.inicial)
+print("Estados Finais:", afn.finais)
+print("Tipo de Autômato:", afn.tipo_aut)
 
 #afd = criarafd.cria_afd()
 #desenha.desenha_automato(afd)
@@ -40,9 +47,9 @@ desenha.desenha_automato(afd)
 
 #print("\n")
 #afd = converte.afn_to_afd(afn)
-print("\n----MINIMIZAÇÃO----\n")
-minimizado = minimiza.minimizacao(afd)
-desenha.desenha_automato(minimizado)
+#print("\n----MINIMIZAÇÃO----\n")
+#minimizado = minimiza.minimizacao(afd)
+#desenha.desenha_automato(minimizado)
 #print(minimizado.tipo_aut)
 
 #equivalencia = equivalencia.equivalencia(afn, afd)

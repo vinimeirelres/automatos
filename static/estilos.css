@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 5;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.botoes{
+    width: 640px;
+    height: 100px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px black;
+}

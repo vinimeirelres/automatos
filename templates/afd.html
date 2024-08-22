@@ -1,0 +1,57 @@
+<!-- templates/afd.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir AFD</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Inserir AFD</h1>
+    <form action="/processar_afd" method="post">
+        <label for="estados">Estados (separados por vírgula):</label><br>
+        <input type="text" id="estados" name="estados"><br><br>
+        
+        <label for="alfabeto">Alfabeto (separados por vírgula):</label><br>
+        <input type="text" id="alfabeto" name="alfabeto"><br><br>
+        
+        <label for="inicial">Estado Inicial:</label><br>
+        <input type="text" id="inicial" name="inicial"><br><br>
+        
+        <label for="finais">Estados Finais (separados por vírgula):</label><br>
+        <input type="text" id="finais" name="finais"><br><br>
+
+        <div id="transicoes-container">
+            <!-- As transições serão adicionadas aqui via JavaScript -->
+        </div>
+        
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+        document.getElementById('estados').addEventListener('input', updateTransicoes);
+        document.getElementById('alfabeto').addEventListener('input', updateTransicoes);
+
+        function updateTransicoes() {
+            const estados = document.getElementById('estados').value.split(',');
+            const alfabeto = document.getElementById('alfabeto').value.split(',');
+            const container = document.getElementById('transicoes-container');
+            container.innerHTML = '';
+
+            estados.forEach(estado => {
+                alfabeto.forEach(simbolo => {
+                    const label = document.createElement('label');
+                    label.textContent = `Transição de ${estado} com ${simbolo}:`;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = `transicao_${estado}_${simbolo}`;
+                    container.appendChild(label);
+                    container.appendChild(input);
+                    container.appendChild(document.createElement('br'));
+                });
+            });
+        }
+    </script>
+</body>
+</html>
