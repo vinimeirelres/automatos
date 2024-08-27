@@ -41,7 +41,7 @@ class TuringMachine(object):
         tamanho = len(self.fita)-1
 
         for i in range(0, tamanho):
-            ft += self.fita.get(i, self.blank_symbol)
+            ft += self.fita[i]
 
         return ft
     
