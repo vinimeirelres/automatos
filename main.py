@@ -27,17 +27,10 @@ import equivalencia
 
 
 #print("\n----CONVERSÃO----\n")
-#afd = criarafd.cria_afd()
+#afd = converte.afn_to_afd(afn)
 #desenha.desenha_automato(afd)
 #palavra = input("Digite a palavra a ser verificada - AFD").split()
-"""
-print("Estados:", afn.estados)
-print("Alfabeto:", afn.alfabeto)
-print("Transições:", afn.transicoes)
-print("Estado Inicial:", afn.inicial)
-print("Estados Finais:", afn.finais)
-print("Tipo de Autômato:", afn.tipo_aut)
-"""
+
 
 #afd = criarafd.cria_afd()
 #desenha.desenha_automato(afd)
