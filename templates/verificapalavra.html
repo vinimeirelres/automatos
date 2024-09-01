@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificar Aceitação de Palavra</title>
+</head>
+<body>
+    <h1>Escolha um automato para testar a palavra</h1>
+    
+
+    <form action="/verifica" method="post">
+        <label for="Arquivo">Selecione autômato para gerar verificar a palavra:</label>
+        <select name="arquivo" id="arquivo">
+            {% for diretorio, arquivo in arquivos %}
+                <option value="{{ diretorio }}/{{ arquivo }}">{{ arquivo }} ({{ diretorio }})</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="Palavra">Digite a palavra a ser verificada: (separado por vírgula)</label>
+        <input type="text" name="palavra" id="palavra">
+        <button type="submit">Verificar Palavra</button>
+    </form>
+</body>
+</html>
+</html>

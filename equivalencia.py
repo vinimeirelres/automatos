@@ -1,6 +1,5 @@
 import minimiza
 import converte
-import desenha
 
 def equivalencia(aut1, aut2):
 

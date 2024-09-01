@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Validade da Palavra</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
+    </head>
+</head>
+<body>
+   
+    <h1>Validade da Palavra</h1>
+    <img src="{{ caminho }}" alt="Imagem do Autômato">
+
+
+    <br><br>
+
+    <h2>Resultado da validade da palavra: {{ resultado }}</h2>
+
+    <br><br>
+
+    <input type="button" onclick="location.href='/';" value="Voltar" />
+</body>
+</html>

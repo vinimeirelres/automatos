@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Imagem de um Autômato</title>
+</head>
+<body>
+    <h1>Escolha um arquivo para gerar a imagem</h1>
+    
+
+    <form action="/geraimagem" method="post">
+        <label for="Arquivo">Selecione autômato para gerar a imagem:</label>
+        <select name="arquivo" id="arquivo">
+            {% for diretorio, arquivo in arquivos %}
+                <option value="{{ diretorio }}/{{ arquivo }}">{{ arquivo }} ({{ diretorio }})</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Gerar Imagem</button>
+    </form>
+</body>
+</html>
+</html>

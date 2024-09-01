@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Equivalência</title>
+</head>
+<body>
+    <h1>Equivalência entre Automatos</h1>
+    
+
+    <form action="/processaequivalencia" method="post">
+        <label for="Arquivo">Selecione o primeiro autômato:</label>
+        <select name="arquivo1" id="arquivo1">
+            {% for diretorio, arquivo in arquivos %}
+                <option value="{{ diretorio }}/{{ arquivo }}">{{ arquivo }} ({{ diretorio }})</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <label for="Arquivo">Selecione o segundo autômato:</label>
+        <select name="arquivo2" id="arquivo2">
+            {% for diretorio, arquivo in arquivos %}
+                <option value="{{ diretorio }}/{{ arquivo }}">{{ arquivo }} ({{ diretorio }})</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Verificar Equivalência</button>
+    </form>
+</body>
+</html>
+</html>
