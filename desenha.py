@@ -28,8 +28,9 @@ def desenha_automato(aut):
     aleatorio = round((random.random())*10,2) #define um numero aleatorio para nome da imagem gerada (cada imagem tera um nome diferente 'aut+numrandom')
     aleatorio = str(aleatorio).replace(".", "")  # converte para string e remove pontos
     
-    os.makedirs('imagens', exist_ok = True) #confere se a pasta imagens existe
-    caminho = os.path.join('imagens', 'aut' + aleatorio) #cria o caminho para onde o arquivo deve ir, e define o nome do arquivo como aut+aleatorio
+    caminho_imagens = os.path.join('static', 'imagens')
+    os.makedirs(caminho_imagens, exist_ok = True) #confere se a pasta imagens existe
+    caminho = os.path.join(caminho_imagens, 'aut' + aleatorio) #cria o caminho para onde o arquivo deve ir, e define o nome do arquivo como aut+aleatorio
     
     res = desenho.render(caminho, format='png',cleanup = True) #gera a imagem e salva em caminho
 
@@ -37,3 +38,5 @@ def desenha_automato(aut):
         print(f"Imagem {('aut'+ aleatorio)} gerada com sucesso")
     else:
         print("Erro ao gerar imagem")
+    
+    return caminho.replace("\\", "/") #retorna o caminho da imagem gerada

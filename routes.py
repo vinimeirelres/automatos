@@ -1,8 +1,15 @@
 import automato
 import desenha
-from flask import Flask, render_template, request, jsonify
+import os
+import pickle
+from flask import Flask, render_template, request,redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
+def lista_arquivos(diretorio):
+    itens = os.listdir(diretorio)
+    arquivos = [item for item in itens if item.endswith('.pkl')]
+    return arquivos
 
 @app.route('/')
 def index():
@@ -15,6 +22,12 @@ def afd():
 @app.route('/afn', methods=['GET'])
 def afn():
     return render_template('afn.html')
+
+@app.route('/converter', methods=['GET'])
+def converter():
+    diretorio = 'afns'
+    afns = lista_arquivos(diretorio)
+    return render_template('converter.html', arquivos = afns)
 
 @app.route('/processar_afd', methods=['POST'])
 def processar_afd():
@@ -41,9 +54,20 @@ def processar_afd():
     print("Estado Inicial:", afd.inicial)
     print("Estados Finais:", afd.finais)
     print("Tipo de Autômato:", afd.tipo_aut)
+    
+
+    caminho = desenha.desenha_automato(afd)
+    relativo = os.path.relpath(caminho, 'static').replace("\\", "/")  # obtém o caminho relativo a 'static' com barras normais
 
 
-    desenha.desenha_automato(afd)
+    nomearquivo = request.form['nome']
+    nomearquivo = nomearquivo + ".pkl"
+    print(nomearquivo)
+    os.makedirs('afds', exist_ok = True) #confere se a pasta imagens existe
+    caminho = os.path.join('afds', nomearquivo) #cria o caminho para onde o arquivo deve ir, e define o nome do arquivo como aut+aleatorio
+    with open(caminho, 'wb') as f:
+        pickle.dump(afd, f)
+    return redirect(url_for('mostrar_imagem', caminho=relativo))
 
 @app.route('/processar_afn', methods=['POST'])
 def processar_afn():
@@ -72,7 +96,26 @@ def processar_afn():
     print("Tipo de Autômato:", afn.tipo_aut)
 
 
-    desenha.desenha_automato(afn)
+    nomearquivo = request.form['nome']
+    nomearquivo = nomearquivo + ".pkl"
+    print(nomearquivo)
+    os.makedirs('afns', exist_ok = True) #confere se a pasta imagens existe
+    caminho = os.path.join('afns', nomearquivo) #cria o caminho para onde o arquivo deve ir, e define o nome do arquivo como aut+aleatorio
+    with open(caminho, 'wb') as f:
+        pickle.dump(afd, f)
+
+    caminho = desenha.desenha_automato(afn)
+    relativo = os.path.relpath(caminho, 'static').replace("\\", "/")  # obtém o caminho relativo a 'static' com barras normais
+    
+    return redirect(url_for('mostrar_imagem', caminho=relativo))
+
+@app.route('/mostrar_imagem')
+def mostrar_imagem():
+    caminho = request.args.get('caminho')
+    imagem_url = url_for('static', filename=caminho)
+    imagem_url = imagem_url.replace("\\", "/")
+    imagem_url = os.path.join('/', f"{imagem_url}.png")
+    return render_template('imagem.html', caminho=imagem_url)
 
 if __name__ == '__main__':
     app.run(debug=True)

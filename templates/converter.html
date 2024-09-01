@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Converter AFD para AFN</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Converter AFD para AFN</h1>
+    
+    <form action="/processarconverter" method="post">
+        <label for="Arquivo">Selecione um AFN para converter:</label>
+        <select name="arquivo" id="arquivo">
+            {% for arquivo in arquivos %}
+                <option value="{{ arquivo }}">{{ arquivo }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Converter</button>
+    </form>
+
+</body>
+
+
+</html>
