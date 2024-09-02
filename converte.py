@@ -14,7 +14,7 @@ def afn_to_afd(afn):
     tabelatransicaoafd = {}
     deltaelemento = []
  
-    for combinacao in listadecombinacoes: #faz a tabela de transicao, fazendo a lista de todas as trsnsições de uma combinacao, para todas as combinacoes
+    for combinacao in listadecombinacoes: #faz a tabela de transicao, fazendo a lista de todas as transições de uma combinacao, para todas as combinacoes
         deltacombinacao = []
         for simbolo in alfabeto:#cada combinacao terá o seu delta atrelado com cada um dos simbolos do alfabeto
             i = 0
