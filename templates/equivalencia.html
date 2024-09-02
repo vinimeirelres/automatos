@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Equivalência</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
     <h1>Equivalência entre Automatos</h1>
     <div>
-        <input type="button" onclick="location.href='/';" value="Voltar" />
+        <input type="button" class = "botao-voltar" onclick="location.href='/';" value="Voltar" />
     </div>
     <br><br>
     <form action="/processaequivalencia" method="post">

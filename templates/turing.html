@@ -8,13 +8,15 @@
 <body>
     <h1>Simulador de Máquina de Turing</h1>
     <div>
-        <input type="button" onclick="location.href='/';" value="Voltar" />
+        <input type="button" class = "botao-voltar" onclick="location.href='/';" value="Voltar" />
     </div>
     <br>
-    <p>Instruções: insira tudo o que está sendo solicitado.</p>
-    <p>Se nas regras para a computação do seu problema houver um blank symbol, digite '*'</p>
-    <p>Se na transição não houver ação a se fazer, digite '-'</p>
-    <p>Símbolos Extras são símbolos que porventura aparecem nas regras, mas não estão na fita</p>
+    <div class="instrucoes-turing">
+        <p>Instruções: insira tudo o que está sendo solicitado.</p>
+        <p>Se nas regras para a computação do seu problema houver um blank symbol, digite '*'</p>
+        <p>Se na transição não houver ação a se fazer, digite '-'</p>
+        <p>Símbolos Extras são símbolos que porventura aparecem nas regras, mas não estão na fita</p>
+    </div>
     
     <form action="/turing" method="post" class="formulario">
         

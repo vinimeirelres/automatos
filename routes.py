@@ -1,4 +1,3 @@
-import automato
 from turing import TuringMachine
 import equivalencia
 import verificar_validade

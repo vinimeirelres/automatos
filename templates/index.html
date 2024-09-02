@@ -9,39 +9,24 @@
     <head>
         <meta charset="UTF-8">
         <title>Autômatos</title>
-       {# <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}"> #}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}"> 
     </head>
     <body>
         <div>
             <h1>Autômatos</h1>
             <h3>Selecione sua entrada</h3>
-            <section>
-                <ul class ="botoes">
-                    <li>
-                        <input type="button" onclick="location.href='/afd';" value="AFD" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/afn';" value="AFN" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/redturing';" value="Máquina de Turing" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/converter';" value="Converter AFD para AFN" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/minimiza';" value="Minimizar AFD" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/geraimagem';" value="Gerar Imagem de um Autômato" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/verpalavra';" value="Verificar Validade da Palavra" />
-                    </li>
-                    <li>
-                        <input type="button" onclick="location.href='/equivalencia';" value="Verificar Equivalência entre Autômatos" />
-                    </li>
-                </ul>
+            <section class ="botoes">
+                 
+                    
+                <input type="button" onclick="location.href='/afd';" value="AFD" />  
+                <input type="button" onclick="location.href='/afn';" value="AFN" />
+                <input type="button" onclick="location.href='/redturing';" value="Máquina de Turing" />
+                <input type="button" onclick="location.href='/converter';" value="Converter AFD para AFN" />
+                <input type="button" onclick="location.href='/minimiza';" value="Minimizar AFD" />
+                <input type="button" onclick="location.href='/geraimagem';" value="Gerar Imagem de um Autômato" />
+                <input type="button" onclick="location.href='/verpalavra';" value="Verificar Validade da Palavra" />
+                <input type="button" onclick="location.href='/equivalencia';" value="Verificar Equivalência entre Autômatos" />
+                  
                 
                 
                 

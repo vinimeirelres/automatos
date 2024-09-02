@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>Gerar Imagem de um Autômato</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-    <h1>Escolha um arquivo para gerar a imagem</h1>
+    <h1>Gerar Imagem</h1>
     
     <div>
-        <input type="button" onclick="location.href='/';" value="Voltar" />
+        <input type="button" class = "botao-voltar" onclick="location.href='/';" value="Voltar" />
     </div>
     <br><br>
     <form action="/geraimagem" method="post">
