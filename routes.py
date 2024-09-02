@@ -11,6 +11,10 @@ from flask import Flask, render_template, request,redirect, url_for
 
 app = Flask(__name__, static_url_path='/static')
 
+os.makedirs('afds', exist_ok = True) 
+os.makedirs('afns', exist_ok = True) 
+
+
 def lista_arquivos(diretorio):
     itens = os.listdir(diretorio)
     arquivos = [item for item in itens if item.endswith('.pkl')]
@@ -111,7 +115,7 @@ def processar_afd():
     nomearquivo = request.form['nome']
     nomearquivo = nomearquivo + ".pkl"
     print(nomearquivo)
-    os.makedirs('afds', exist_ok = True) #confere se a pasta imagens existe
+    os.makedirs('afds', exist_ok = True) 
     caminho = os.path.join('afds', nomearquivo) #cria o caminho para onde o arquivo deve ir, e define o nome do arquivo como aut+aleatorio
     with open(caminho, 'wb') as f:
         pickle.dump(afd, f)
