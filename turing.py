@@ -1,5 +1,5 @@
 class TuringMachine(object):
-    blank_symbol = " "
+    blank_symbol = "*"
 
     def __init__(self, fita="", blank_symbol=" ", inicial="", final=None, transicoes=None):
         self.fita = dict(enumerate(fita))

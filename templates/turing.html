@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de Máquina de Turing</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <h1>Simulador de Máquina de Turing</h1>
+    <div>
+        <input type="button" onclick="location.href='/';" value="Voltar" />
+    </div>
+    <br>
+    <p>Instruções: insira tudo o que está sendo solicitado.</p>
+    <p>Se nas regras para a computação do seu problema houver um blank symbol, digite '*'</p>
+    <p>Se na transição não houver ação a se fazer, digite '-'</p>
+    <p>Símbolos Extras são símbolos que porventura aparecem nas regras, mas não estão na fita</p>
+    
+    <form action="/turing" method="post" class="formulario">
+        
+        <label for="fita">Fita (separe cada símbolo por vírgula):</label><br>
+        <input type="text" id="fita" name="fita"><br><br>
+
+        <label for="simbolos_extras">Símbolos Extras (separados por vírgula):</label><br>
+        <input type="text" id="simbolos_extras" name="simbolos_extras"><br><br>
+
+        <label for="estados">Estados (separados por vírgula):</label><br>
+        <input type="text" id="estados" name="estados"><br><br>
+        
+        <label for="inicial">Estado Inicial:</label><br>
+        <input type="text" id="inicial" name="inicial"><br><br>
+        
+        <label for="finais">Estados de Aceitação (separados por vírgula):</label><br>
+        <input type="text" id="finais" name="finais"><br><br>
+
+        <div id="transicoes-container">
+            <!-- As transições serão adicionadas aqui via JavaScript -->
+        </div>
+        
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+        document.getElementById('estados').addEventListener('input', updateTransicoes);
+        document.getElementById('fita').addEventListener('input', updateTransicoes);
+        document.getElementById('simbolos_extras').addEventListener('input', updateTransicoes);
+
+        function updateTransicoes() {
+            const estados = document.getElementById('estados').value.split(',');
+            const fita = document.getElementById('fita').value.split(',');
+            const simbolos_extras = document.getElementById('simbolos_extras').value.split(',');
+            const simbolos = [...new Set([...fita, ...simbolos_extras])];  // Combina fita e símbolos extras
+            const container = document.getElementById('transicoes-container');
+            container.innerHTML = '';
+
+            estados.forEach(estado => {
+                simbolos.forEach(simbolo => {
+                    const label = document.createElement('label');
+                    label.textContent = `Transição de ${estado} com '${simbolo}'se não houver ação, digite '-':`;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = `transicao_${estado}_${simbolo}`;  
+                    container.appendChild(label);
+                    container.appendChild(input);
+                    container.appendChild(document.createElement('br'));
+                });
+            });
+        }
+    </script>
+</body>
+</html>

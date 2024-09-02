@@ -8,10 +8,10 @@ import desenha
 import equivalencia
 
 
-afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
+#afn = criarafn.cria_afn() #cria o afd e salva na variavel afd
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
-
+""""
 palavra = input("Digite a palavra a ser verificada - AFN").split()
 print(palavra)
 
@@ -32,7 +32,7 @@ else:
 print(afn.conjaceit)
 #afn = criarafn.cria_afn()
 #desenha.desenha_automato(afn)
-
+"""
 
 #print("\n----CONVERSÃO----\n")
 #afd = converte.afn_to_afd(afn)
@@ -63,11 +63,15 @@ print(afn.conjaceit)
 
 #print(F"\nAlfabeto: {afd.alfabeto}\nEstados: {afd.estados}\nEstado Inicial: {afd.inicial}\nEstado(s) Final(is): {afd.finais}\nTransicoes: {afd.transicoes}\nConjunto Aceitacao: {afd.conjaceit}\n")
 
-fita = " racecar "
+#fita, estados, inicial, final
+#pra cada estado, pra cada simbolo da fita -> proximo estado, simbolo a ser escrito, direcao
+#quer que lide com blanks?
+fita = "racecar*"
 inicial = "q0"
 estados_aceitacao = {"final"}
+
 transicoes = {
-    ("q0", " "): ("q1", " ", "R" ),
+    #("q0", "*"): ("q1", "*", "R" ),
     ("q0", "r"): ("q1", "X", "R"),  # Marca 'r' no início com 'X', vai para a direita
     ("q0", "a"): ("q1", "a", "R"),  # Continua para a direita
     ("q0", "c"): ("q1", "c", "R"),  # Continua para a direita
@@ -79,7 +83,7 @@ transicoes = {
     ("q1", "c"): ("q1", "c", "R"),  # Continua para a direita
     ("q1", "e"): ("q1", "e", "R"),  # Continua para a direita
     ("q1", "X"): ("q1", "X", "R"),  # Ignora 'X' e continua
-    ("q1", " "): ("q2", " ", "L"),  # Ao atingir o fim da fita, move para a esquerda
+    ("q1", "*"): ("q2", "*", "L"),  # Ao atingir o fim da fita, move para a esquerda
 
     ("q2", "r"): ("q3", "r", "L"),  # Se encontrar 'r', substitui por 'X' e retorna ao início
     ("q2", "a"): ("q3", "a", "L"),  # Continua para a esquerda
@@ -91,8 +95,8 @@ transicoes = {
     ("q3", "a"): ("q3", "a", "L"),  # Continua para a esquerda
     ("q3", "c"): ("q3", "c", "L"),  # Continua para a esquerda
     ("q3", "e"): ("q3", "e", "L"),  # Continua para a esquerda
-    ("q3", "X"): ("q0", "X", "R"),  # Ignora 'X' e volta ao início
-    ("q3", " "): ("final", " ", "N"),  # Se atingir o início da fita, aceita
+    #("q3", "X"): ("q0", "X", "R"),  # Ignora 'X' e volta ao início
+    ("q3", "X"): ("final", "r", "N"),  # Se atingir o início da fita, aceita
 }
 
 t = TuringMachine(fita, 

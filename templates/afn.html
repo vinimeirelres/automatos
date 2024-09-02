@@ -8,7 +8,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-    <h1>Inserir AFD</h1>
+    <h1>Inserir AFN</h1>
+    <div>
+        <input type="button" onclick="location.href='/';" value="Voltar" />
+    </div>
+    <br><br>
     <form action="/processar_afn" method="post">
         <label for="nome">Nome do arquivo:</label>
         <input type="text" id="nome" name="nome"><br><br>

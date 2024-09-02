@@ -1,4 +1,5 @@
 import automato
+from turing import TuringMachine
 import equivalencia
 import verificar_validade
 import minimiza
@@ -27,6 +28,10 @@ def afd():
 @app.route('/afn', methods=['GET'])
 def afn():
     return render_template('afn.html')
+
+@app.route('/redturing', methods=['GET'])
+def redturing():
+    return render_template('turing.html')
 
 @app.route('/converter', methods=['GET'])
 def converter():
@@ -356,6 +361,45 @@ def pequivale():
         return redirect(url_for('mostrar_equivalencia', caminho1=relativo1, caminho2=relativo2, resultado=quandoverdade))
     else:
         return redirect(url_for('mostrar_equivalencia', caminho1=relativo1, caminho2=relativo2, resultado=quandonverdade))
+
+@app.route('/turing', methods=['POST'])
+def processaturing():
+    fita = request.form['fita'].replace(',', '')
+    simbolosextras = request.form['simbolos_extras'].split(',')
+    estados = request.form['estados'].split(',')
+    inicial = request.form['inicial']
+    estados_aceitacao = set(request.form['finais'].split(','))
+    transicoes = {}
+
+    for estado in estados:
+        for simbolo in fita:
+            chave_transicao = f'transicao_{estado}_{simbolo}'
+            transicao_valor = request.form.get(chave_transicao)
+            if transicao_valor:
+                if transicao_valor != '-':
+                    estado_destino, simbolo_escrever, direcao = transicao_valor.split(',')
+                    transicoes[(estado, simbolo)] = (estado_destino, simbolo_escrever, direcao)
     
+    if(simbolosextras):
+        for estado in estados:
+            for simbolo in simbolosextras:
+                chave_transicao = f'transicao_{estado}_{simbolo}'
+                transicao_valor = request.form.get(chave_transicao)
+                if transicao_valor:
+                    if transicao_valor != '-':
+                        estado_destino, simbolo_escrever, direcao = transicao_valor.split(',')
+                        transicoes[(estado, simbolo)] = (estado_destino, simbolo_escrever, direcao)  
+
+    t = TuringMachine(fita, 
+                  inicial=inicial,
+                  final=estados_aceitacao,
+                  transicoes=transicoes)
+
+    res = t.executa()
+
+    return render_template('resulturing.html', resultado=res)        
+
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
