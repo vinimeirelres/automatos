@@ -47,17 +47,28 @@
             container.innerHTML = '';
 
             estados.forEach(estado => {
-                alfabeto.forEach(simbolo => {
-                    const label = document.createElement('label');
-                    label.textContent = `Transição de ${estado} com ${simbolo}:`;
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.name = `transicao_${estado}_${simbolo}`;
-                    container.appendChild(label);
-                    container.appendChild(input);
-                    container.appendChild(document.createElement('br'));
+            alfabeto.forEach(simbolo => {
+                const label = document.createElement('label');
+                label.textContent = `Transição de ${estado} com ${simbolo}:`;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `transicao_${estado}_${simbolo}`;
+                
+                input.addEventListener('input', function() {
+                    const valores = input.value.split(/[, ]+/);
+                    if (valores.length > 1) {
+                        alert('A transição só pode ter um valor!');
+                        input.value = valores[0];
+                    }
                 });
+
+                container.appendChild(label);
+                container.appendChild(input);
+                container.appendChild(document.createElement('br'));
             });
+        });
+
         }
     </script>
 </body>
